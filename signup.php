@@ -20,12 +20,20 @@
       <form class="form-signin">
         <img class="mb-4" src="img/market.png" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" id="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
         <label for="inputPassword" class="sr-only">Confirm Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Confirm Password" required="">
+        <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required="">
+        <label for="inputEmail" class="sr-only">First Name</label>
+        <input type="text" id="inputFirstName" class="form-control" placeholder="First Name" required="" autofocus="">
+        <label for="inputEmail" class="sr-only">Last Name</label>
+        <input type="text" id="inputLastName" class="form-control" placeholder="Last Name" required="" autofocus="">
+        <label for="inputEmail" class="sr-only">Email Address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <label for="inputEmail" class="sr-only">Cellphone</label>
+        <input type="tel" id="inputCellphone" class="form-control" placeholder="Cellphone" required="" autofocus="">
         <label>
             Already a user? <a href="signin.php">Sign in now.</a>
         </label>
