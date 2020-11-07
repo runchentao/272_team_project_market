@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:30px">
   <div class="container">
     <a class="navbar-brand" href="home.php">272 Team | Market Place</a>
-    <a class="navbar-brand" href="login.php" style="float:right">sign in</a>
+    <a class="navbar-brand" href="signin.php" style="float:right">sign in</a>
     </div>
   </div>
 </nav>

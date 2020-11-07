@@ -29,6 +29,9 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
+        <label>
+            New to our website? <a href="signup.php">Sign up now.</a>
+          </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
       </form>
