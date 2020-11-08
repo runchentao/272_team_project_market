@@ -24,7 +24,7 @@
         echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
     }
 
-    $sql = "INSERT INTO Account (Username, Passwd, FirstName, LastName, EmailAddress, CellPhone)
+    $sql = "INSERT INTO users (Username, Passwd, FirstName, LastName, EmailAddress, CellPhone)
     VALUES ('$username', '$password', '$firstName', '$lastName', '$email', '$cellPhone')";
 
     if ($mysqli->query($sql) === TRUE) {
