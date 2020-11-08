@@ -1,7 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:30px">
   <div class="container">
     <a class="navbar-brand" href="home.php">272 Team | Market Place</a>
-    <a class="navbar-brand" href="signin.php" style="float:right">sign in</a>
+    <?php
+          // add condition
+          session_start();
+          echo $_SESSION['loggedin'];
+          print'<div style="float:right">';
+          if($_SESSION['loggedin'] == true){
+            $divStyle='style="visibility:visible;"'; //hide div
+          }else{
+            print'<a class="navbar-brand" href="signin.php" '.$divStyle.'>sign in</a>';
+            $divStyle='style="display:none;"';
+          }
+          print'<li class="nav-item" name="logout" '.$divStyle.'><a class="navbar-brand" class="nav-link" href="success.php">Logout</a>
+          </li>';
+          print'</div>'
+        ?>
     </div>
   </div>
 </nav>
