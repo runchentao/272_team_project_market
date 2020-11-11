@@ -20,16 +20,15 @@
         echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
     }
 
-    $sql = "SELECT * FROM Account WHERE Username='$username' AND Passwd='$password'";
+    $sql = "SELECT * FROM users WHERE Username='$username' AND Passwd='$password'";
     
     $result = mysqli_query($mysqli, $sql); 
     $rows = mysqli_num_rows($result);
     if($rows==1){
         //echo "successful";
         $row = mysqli_fetch_array($result);
-        //echo $row['Username'];
         $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $username;
+        $_SESSION['user'] = $row;
         header("location: home.php");
     }else{
         echo "<script>
