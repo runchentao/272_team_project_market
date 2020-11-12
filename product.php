@@ -136,53 +136,86 @@ $id = $_GET['id']-1;
         <p class="mb-0">Nice one, love it!</p>
       </div>
     </div>
-    <hr>
-    <h5 class="mt-4">Add a review</h5>
-    <p>Your email address will not be published.</p>
-    <div class="my-3">
-      <ul class="rating mb-0">
-        <script>
-          function fav() {
-            document.getElementById("favIcon").toggleClass('fa-star-o fa-star');
-          }
-        </script>
-        <li>
-          <a href="#!" onclick="toggle()">
-            <i class="fas fa-star fa-sm text-primary" id="favIcon1"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#!">
-            <i class="fas fa-star fa-sm text-primary" id="favIcon2"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#!">
-            <i class="fas fa-star fa-sm text-primary" id="favIcon3"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#!">
-            <i class="fas fa-star fa-sm text-primary" id="favIcon4"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#!">
-            <i class="far fa-star fa-sm text-primary" id="favIcon5"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
     <div>
-      <!-- Your review -->
-      <div class="md-form md-outline">
-        <textarea id="form76" class="md-textarea form-control pr-6" rows="4" placeholder="Your Review"></textarea>
-      </div>
-      <p>Name: <?php print_r($_SESSION['user']['Username']) ?></p>
-      <p>Email: <?php print_r($_SESSION['user']['EmailAddress']) ?></p>
-      <div class="text-right pb-2">
-        <button type="button" class="btn btn-primary waves-effect waves-light">Add a review</button>
-      </div>
+        <h5 class="mt-4">Add a review</h5>
+        <div class="my-3">
+        <ul class="rating mb-0">
+            <li>
+            <a href="#!">
+                <i onclick="myFunction(this)" class="far fa-star fa-sm text-primary" id="far1"></i>
+            </a>
+            </li>
+            <li>
+            <a href="#!">
+                <i onclick="myFunction(this)" class="far fa-star fa-sm text-primary" id="far1"></i>
+            </a>
+            </li>
+            <li>
+            <a href="#!">
+                <i onclick="myFunction(this)" class="far fa-star fa-sm text-primary" id="far1"></i>
+            </a>
+            </li>
+            <li>
+            <a href="#!">
+                <i onclick="myFunction(this)" class="far fa-star fa-sm text-primary" id="far1"></i>
+            </a>
+            </li>
+            <li>
+            <a href="#!">
+                <i onclick="myFunction(this)" class="far fa-star fa-sm text-primary" id="far"></i>
+            </a>
+            </li>
+        </ul>
+        <div id="counter">1</div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+            <script type="text/javascript">
+                var count = 0;
+                var total;
+                function myFunction(x) {
+                    var myClasses = x.classList;
+                    //$("#counter").html("My current count is: "+myClasses);
+                    if(myClasses[4]==="fas"){
+                    count--;
+                    }else{
+                    count++;
+                    }
+                    x.classList.toggle("fas");
+                    $("#counter").html("My current count is: "+ count);
+                }
+                // $.ajax({
+                //     url: "getCount.php",
+                //     type: "post",
+                //     data: {
+                //         count: count
+                //     }
+                // });
+            </script>
+        </div>
+        <!-- Your review -->
+        <div class="md-form md-outline">
+            <textarea id="form76" class="md-textarea form-control pr-6" rows="4" placeholder="Your Review"></textarea>
+        </div>
+        <p>Name: <?php print_r($_SESSION['user']['Username']) ?></p>
+        <p>Email: <?php print_r($_SESSION['user']['EmailAddress']) ?></p>
+        <button class="btn btn-primary waves-effect waves-light">Add a review</button>
+    <script>
+        $("#btn btn-primary waves-effect waves-light").click(function(){
+        $("#counter").html("My current count is: "+ count);
+        // $.ajax({
+        //                     type: 'post',
+        //                     url: 'dzialaj.php',
+        //                     data: {'password': password},
+        //                     cache:false,
+        //                     success: function(data)
+        //                     {
+        //                         alert(data);
+        //                         console.log(result)
+        //         console.log(result.status);
+        //                     }
+        //                 });
+
+        });
+    </script>
     </div>
   </div>
 </div>

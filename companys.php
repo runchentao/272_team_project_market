@@ -32,7 +32,15 @@
                     <li style="color: red">FindH</li>
                     <li>Come and look for your home</li>
                     </ul>
-                    <?php echo '<a href = "https://reneechen108.website/indivialProject/home.php?fromMarket=true&&id='. $_SESSION["user"][0].'">Read More...</a>'; ?>
+                    
+                    <form action= "http://localhost:8888/site_1/home.php" method= "POST">
+                        <?php echo "<input type= 'hidden' name= 'userId' value= '".$_SESSION['user'][0]."'>"; ?>
+                        <!-- <input type= "hidden" name= fromMarket value= "true"> -->
+                        <?php echo "<input type= 'hidden' name= 'time' value= '".time()."'>"; ?>
+                        <!-- <input type= "hidden" name= time value= "current"> -->
+                        <input type= "submit" name= "market-redirect" value= "Company A">
+                    </form>
+                    <!-- <?php echo '<a href = "https://reneechen108.website/indivialProject/home.php?fromMarket=true&&id='. $_SESSION["user"][0].'">Read More...</a>'; ?> -->
                     <!-- <button type="button" class="btn btn-lg btn-block btn-primary" onClick="javascript:clickinner1(this);">MORE</button>
                     <script>
                         function clickinner1(mybtn){
