@@ -1,0 +1,17 @@
+
+
+#home-jumbo.jumbotron {
+    margin-bottom: 0px;
+    min-height: 665px;
+}
+#browse-btn {
+    margin-top:25px;
+}
+#browse-btn > a {
+    background-color: #343a40;
+    border-width: 0px;
+}
+#contact-link {
+    font-size: 14px;
+    color: rgb(42, 41, 41);
+}

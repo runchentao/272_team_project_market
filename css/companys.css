@@ -1,0 +1,28 @@
+
+.card-body {
+    position: relative;
+    z-index:5;
+    color: white;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.card-body::after {
+    content: "";
+    position: absolute;
+    left:0px;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    background-color:rgba(34, 34, 34, 0.692);
+    z-index:-1;
+}
+#card-body-1.card-body {
+    background-image: url('../img/real_estate.jpg');
+}
+#card-body-2.card-body {
+    background-image: url('../img/web.jpg');
+}
+.hiddenURL {
+    display: none;
+}
