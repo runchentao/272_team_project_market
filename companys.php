@@ -7,12 +7,12 @@
 <div class="modal fade" id="signInPrompt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="align-items:center">
                 <h4 class="modal-title" id="myModalLabel">Alert</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
             </div>
-            <div class="modal-body">在这里添加一些文本</div>
+            <div class="modal-body">Since you haven't signed in, Market Place won't be able to keep 
+                track of your activities while you are in <span id="modalCompanyName"></span> site</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary">提交更改</button>
@@ -38,7 +38,7 @@
                 <input type="submit" name="market-redirect" value="Go to FindH">
             </form>
             <?php else: ?>
-            <a href="https://reneechen108.website/indivialProject/home.php">Go to FindH</a>
+                <button class="btn btn-primary nonlog-cmpy-visit">Go to FindH</button>
             <?php endif; ?>
             <!-- <?php echo '<a href = "https://reneechen108.website/indivialProject/home.php?fromMarket=true&&id='. $_SESSION["user"][0].'">Read More...</a>'; ?> -->
             <!-- <button type="button" class="btn btn-lg btn-block btn-primary" onClick="javascript:clickinner1(this);">MORE</button>
@@ -67,7 +67,8 @@
                 <input type="submit" name="market-redirect" value="Go to Webify">
             </form>
             <?php else: ?>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#signInPrompt">Go to webify</button>
+            <span class="hiddenURL">http://haoyangliu.com/272CompanyDemo/</span>
+            <button class="btn btn-primary nonlog-cmpy-visit">Go to Webify</button>
             <?php endif; ?>
         </div>
     </div>

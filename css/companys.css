@@ -23,3 +23,6 @@
 #card-body-2.card-body {
     background-image: url('../img/web.jpg');
 }
+.hiddenURL {
+    display: none;
+}
