@@ -1,0 +1,17 @@
+#signin-form-container {
+    width: 100%; 
+    min-height: 664.99px;
+    position: relative;
+}
+.form-signin {
+    min-width: 320px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.form-signin > img,  .form-signin > h1{
+    display: block;
+    margin:0px auto;
+    text-align: center;
+}
