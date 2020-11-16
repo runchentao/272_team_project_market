@@ -78,7 +78,7 @@
             <h4 class="my-0 font-weight-normal">Restaurant & Bar</h4>
         </div>
         <div class="card-body">
-            <h1 class="card-title pricing-card-title">JiuBar></h1>
+            <h1 class="card-title pricing-card-title">JiuBar</h1>
             <ul class="list-unstyled mt-3 mb-4">
                 <li>Developed by: <b>Runchen Tao</b></li>
                 <li>Dine-in & Takeout</li>
