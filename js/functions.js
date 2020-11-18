@@ -7,5 +7,11 @@ $(".nonlog-cmpy-visit").click(function(e) {
     $("#signInPrompt").modal("show");
 });
 $("#signInPrompt").on("show.bs.modal", function() {
-    
+    $("#modalCompanyName").text(companyName);
 });
+$("#prompt-visit").click(function(e) {
+    window.location.href = companyURL;
+});
+$("#prompt-login").click(function(e) {
+    window.location.href = "signin.php";
+})
