@@ -33,7 +33,7 @@
                 <li>Come and look for your home</li>
             </ul>
             <?php if(isset($_SESSION['user'])):?>
-            <form action="http://localhost:8888/site_1/home.php" method="POST">
+            <form action="https://reneechen108.website/indivialProject/home.php" method="POST">
                 <input type='hidden' name='userId' value='<?php echo $_SESSION['user'][0]?>'>
                 <input type="submit" name="market-redirect" value="Go to FindH">
             </form>
