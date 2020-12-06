@@ -14,5 +14,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" >
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css?v=3660" >
+    <link rel="stylesheet" href="css/font-awesome.min.css?v=3660">
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </head>

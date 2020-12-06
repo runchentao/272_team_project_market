@@ -5,7 +5,7 @@
             <div class="col-md-4">
                 <div style="text-align: center" class="footer-grid">
                     <div style="display: flex">
-                        <img class="mb-2" src="img/market.png" alt="" width="30">
+                        <img class="mb-2" src="img/market.png" alt="" width="30" height="30">
                         <h3 style="margin-left: 8px">Market Place</h3>
                     </div>
                     <small class="d-block mb-3 text-muted" id="slogan">Company User Connections</small>
@@ -44,9 +44,6 @@
         </div>
     </div>
 </footer>
-<script src="js/jquery-3.5.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <script src="js/functions.js"></script>
 </body>
 

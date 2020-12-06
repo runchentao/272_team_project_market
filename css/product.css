@@ -1,0 +1,21 @@
+ .rating > li{
+    display: inline-block;
+}
+.rating-counter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.rating-counter-container > #counter {
+    margin-left: 5px;
+}
+.rating-counter-container > .rating {
+    padding-left: 0px;
+    color: #f5d02c;
+    cursor: pointer;
+}
+.rating-counter-container {
+    margin-bottom: 7px;
+}
