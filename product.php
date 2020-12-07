@@ -16,14 +16,18 @@ if($rows==1){
     $other_sql = "SELECT * FROM users WHERE id='$userID'";
     $other_result = mysqli_query($mysqli, $other_sql);
     $other_row = mysqli_fetch_array($other_result);
-    if($other_row["ViewHistory"]){
-      $his = json_decode($other_row["ViewHistory"]);
+    $his = json_decode($other_row["ViewHistory"]);
+    
+    if($his != null){
       array_push($his, $productInfo);    
       $browser = json_encode($his);
       $update_sql = "UPDATE users SET ViewHistory='$browser' WHERE id='$userID'";
       $update_result = mysqli_query($mysqli, $update_sql); 
     }else{
-      $update_sql = "UPDATE users SET ViewHistory='$productInfo' WHERE id='$userID'";
+      $hisArray = array();
+      $hisArray[] = $productInfo;
+      $viewJson = json_encode($hisArray);
+      $update_sql = "UPDATE users SET ViewHistory='$viewJson' WHERE id='$userID'";
       $update_result = mysqli_query($mysqli, $update_sql); 
     }
   }
@@ -32,59 +36,51 @@ if($rows==1){
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
 <Link rel="stylesheet" href="css/product.css">
-<div class="row mb-2" style="padding-top:100px; margin: auto; width: 90%;">
-    <section class="mb-5">
-        <div class="row">
-            <div class="col-md-6 mb-4 mb-md-0">
-                <div class="mdb-lightbox" data-pswp-uid="1">
-                    <div class="row product-gallery mx-1">
-                        <div class="col-12 mb-0">
-                            <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 400px;">
-                                <?php echo '<image class="img-fluid z-depth-1" src="'.$row['productImg'].'" style="margin-top: -90px; transform-origin: center center; transform: scale(1);">'; ?>
-                            </figure>
-                        </div>
-                    </div>
+<div class="container row mb-2" style="padding-top:100px; margin: auto;">
 
-                </div>
+    <div class="col-md-6 col-sm-12" style="background: url('<?php echo $row['productImg']; ?>'); padding: 10px; 
+                     width: 30vw; height: 22.5vw; min-width: 304px; min-height: 258px;
+                     background-size: cover; background-position: center center;">
+    </div>
+    <div class="col-md-6" style="padding-left: 20px;">
 
-            </div>
-            <div class="col-md-6">
+        <h5><?php echo $row['productName']; ?></h5>
+        <p class="mb-2 text-muted text-uppercase small"><?php echo $row['company']; ?></p>
 
-                <h5><?php echo $row['productName']; ?></h5>
-                <p class="mb-2 text-muted text-uppercase small"><?php echo $row['company']; ?></p>
-
-                <ul class="rating">
-                  <?php 
-                  $idx = 0;
-                  for($idx = 0; $idx < $row['rating'];$idx++) { ?>
-                    <li>
-                        <i class="fa fa-star fa-sm text-primary"></i>
-                    </li>
-                  <?php } 
-                  $missing = 5 - $idx;
-                  for($idx = 0; $idx < $missing; $idx++) { ?>
-                    <li>
-                        <i class="fa fa-star-o fa-sm text-primary"></i>
-                    </li>
-                  <?php } 
-                  ?>
-                </ul>
-                <p><span class="mr-1"><strong>$<?php echo $row['price']; ?></strong></span></p>
-                <hr>
-
-                <button type="button" class="btn btn-primary btn-md mr-1 mb-2 waves-effect waves-light">Buy now</button>
-                <button type="button" class="btn btn-light btn-md mr-1 mb-2 waves-effect waves-light">
-                    <i class="fa fa-font-awesome"></i>
-                    Save as Favorite
-                </button>
-            </div>
+        <ul class="rating" style="padding-left: 0px;">
+            <?php for($idx = 0; $idx < $row['rating'];$idx++): ?>
+              <li>
+                  <i class="fa fa-star fa-sm text-primary"></i>
+              </li>
+            <?php endfor; ?>
+            <?php for($idx = 0; $idx < 5- $row['rating']; $idx++): ?>
+              <li>
+                  <i class="fa fa-star-o fa-sm text-primary"></i>
+              </li>
+            <?php endfor; ?>
+        </ul>
+        <p><span class="mr-1"><strong>$<?php echo $row['price']; ?></strong></span></p>
+        <hr>
+        <div style="margin-top: 30px;">
+        <button type="button" class="btn btn-primary btn-md mr-1 mb-2 waves-effect waves-light">Buy now</button>
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2 waves-effect waves-light">
+            <i class="fa fa-font-awesome"></i>
+            Save as Favorite
+        </button>
         </div>
+    </div>
 
-    </section>
     <!--Section: Block Content-->
     <!-- Classic tabs -->
-    <div class="classic-tabs" style="width: 100%;">
-
+    <?php
+      $proId = $row['id']; 
+      // echo $proId;
+      $review_sql = "SELECT * FROM Review WHERE productId='$proId'";
+      $review_result = mysqli_query($mysqli, $review_sql);
+      $review_rows = mysqli_num_rows($review_result);
+      echo $review_rows;
+    ?>
+    <div class="classic-tabs" style="width: 100%; margin: 30px auto;">
         <ul class="nav tabs-primary nav-justified" id="advancedTab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active show" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -92,7 +88,7 @@ if($rows==1){
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
-                    aria-controls="reviews" aria-selected="false">Reviews (1)</a>
+                    aria-controls="reviews" aria-selected="false">Reviews (<?php echo $review_rows;?>)</a>
             </li>
         </ul>
         <div class="tab-content" id="advancedTabContent">
@@ -101,11 +97,24 @@ if($rows==1){
                 <p class="small text-muted text-uppercase mb-2">
                     <?php echo $row['additionalInfo']; ?>
                 </p>
-                <h6>$<?php echo $row['price']; ?></h6>
+                <?php 
+                  $priceArr = str_split($row['price']);
+                  $count = 0;
+                  $formattedPrice = "";
+                  for ($i = count($priceArr) - 1; $i>=0;$i--) {
+                    if ($count == 3) {
+                      $formattedPrice = "," . $formattedPrice;
+                      $count = 0;
+                    }
+                    $formattedPrice = $priceArr[$i] . $formattedPrice;
+                    $count++;
+                  }
+                ?>
+                <h6>$<?php echo $formattedPrice; ?></h6>
                 <p class="pt-1"><?php echo $row['productDescription']; ?></p>
             </div>
             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-            <?php
+                <?php
               $proId = $row['id']; 
               // echo $proId;
               $review_sql = "SELECT * FROM Review WHERE productId='$proId'";
@@ -113,47 +122,47 @@ if($rows==1){
                 $review_rows = mysqli_num_rows($review_result);
                 if($review_rows > 0){
                   ?>
-                      <h5><span><?php echo $review_rows?></span> review for <span><?php echo $row['productName']?></span></h5>
-                    <?php while($review_row = mysqli_fetch_array($review_result)){ ?>  
-                          <div class="media mt-3 mb-4 reviews-box">
-                              <img class="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
-                                  width="62" alt="Generic placeholder image">
-                              <div class="media-body">
-                                  <div class="d-flex justify-content-between">
-                                      <p class="mt-1 mb-2">
-                                          <strong><?php echo $review_row['username']?> </strong>
-                                          <span>– </span><span><?php echo $review_row['createdAt']?> </span>
-                                      </p>
-                                  </div>
-                                  <p class="mb-0"><?php echo $review_row['content']?></p>
-                              </div>
-                          </div>
-                        <?php 
+                <h5><span><?php echo $review_rows?></span> review for <span><?php echo $row['productName']?></span></h5>
+                <?php while($review_row = mysqli_fetch_array($review_result)){ ?>
+                <div class="media mt-3 mb-4 reviews-box">
+                    <img class="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
+                        width="62" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="mt-1 mb-2">
+                                <strong><?php echo $review_row['username']?> </strong>
+                                <span>– </span><span><?php echo $review_row['createdAt']?> </span>
+                            </p>
+                        </div>
+                        <p class="mb-0"><?php echo $review_row['content']?></p>
+                    </div>
+                </div>
+                <?php 
                         }
                       }
                     }?>
-                  <div>
-                  <form action="review.php?id=<?php echo $row['id'];?>" method="post">
-                    <h5 class="mt-4">Add a review</h5>
-                    <div class="rating-counter-container">
-                        <div class="rating mb-0">                   
-                          <i class="fa fa-star-o fa-sm"></i>                          
-                          <i class="fa fa-star-o fa-sm"></i>                          
-                          <i class="fa fa-star-o fa-sm"></i>                          
-                          <i class="fa fa-star-o fa-sm"></i>                                                    
-                          <i class="fa fa-star-o fa-sm"></i>                          
+                <div>
+                    <form action="review.php?id=<?php echo $row['id'];?>" method="post">
+                        <h5 class="mt-4">Add a review</h5>
+                        <div class="rating-counter-container">
+                            <div class="rating mb-0">
+                                <i class="fa fa-star-o fa-sm"></i>
+                                <i class="fa fa-star-o fa-sm"></i>
+                                <i class="fa fa-star-o fa-sm"></i>
+                                <i class="fa fa-star-o fa-sm"></i>
+                                <i class="fa fa-star-o fa-sm"></i>
+                            </div>
+                            <div id="counter"></div>
                         </div>
-                        <div id="counter"></div>
-                    </div>
-                    <!-- Your review -->
-                    <div class="md-form md-outline">
-                        <textarea id="form76" class="md-textarea form-control pr-6" rows="4"
-                            placeholder="Your Review" name="review"></textarea>
-                    </div>
-                    <p>Name: <?php print_r($_SESSION['user']['Username']) ?></p>
-                    <p>Email: <?php print_r($_SESSION['user']['EmailAddress']) ?></p>
-                    <button class="btn btn-primary waves-effect waves-light" type="submit">Add a review</button>
-                  </form>
+                        <!-- Your review -->
+                        <div class="md-form md-outline">
+                            <textarea id="form76" class="md-textarea form-control pr-6" rows="4"
+                                placeholder="Your Review" name="review"></textarea>
+                        </div>
+                        <p>Name: <?php print_r($_SESSION['user']['Username']) ?></p>
+                        <p>Email: <?php print_r($_SESSION['user']['EmailAddress']) ?></p>
+                        <button class="btn btn-primary waves-effect waves-light" type="submit">Add a review</button>
+                    </form>
                 </div>
             </div>
         </div>
