@@ -75,7 +75,6 @@
             </div>
         </div>
     </div>
-
     <div class="card mb-4 col-xl-3 col-md-6">
         <div>
             <div class="card-header">
