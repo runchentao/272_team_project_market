@@ -5,8 +5,8 @@
 <?php include('includes/header.php');?>
 <Link rel="stylesheet" href="css/companys.css">
 <div class="container" style="text-align: center; margin-top: 40px;color:#5a4e4e;">
-<h1>These are the companies we work with</h1>
-<h3>Looking forward to see your company here</h3>
+    <h1>These are the companies we work with</h1>
+    <h3>Looking forward to see your company here</h3>
 </div>
 <div class="modal fade" id="signInPrompt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -75,7 +75,6 @@
             </div>
         </div>
     </div>
-
     <div class="card mb-4 col-xl-3 col-md-6">
         <div>
             <div class="card-header">
@@ -89,12 +88,12 @@
                     <li>The world's best bar</li>
                 </ul>
                 <?php if(isset($_SESSION['user'])):?>
-                <form action="https://runchen-tao.herokuapp.com/" method="POST">
+                <form action="https://jiu-bar.herokuapp.com/" method="POST">
                     <input type='hidden' name='userId' value='<?php echo $_SESSION['user'][0]?>'>
                     <input class="btn btn-primary" type="submit" name="market-redirect" value="Go to JiuBar">
                 </form>
                 <?php else: ?>
-                <span class="hiddenURL">https://runchen-tao.herokuapp.com/</span>
+                <span class="hiddenURL">https://jiu-bar.herokuapp.com/</span>
                 <button class="btn btn-primary nonlog-cmpy-visit">Go to JiuBar</button>
                 <?php endif; ?>
             </div>
