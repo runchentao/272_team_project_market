@@ -50,13 +50,10 @@
                     <a class="nav-link" href="products.php">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="history.php">History</a>
+                    <a class="nav-link" href="history.php?his=true">History</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="popular.php">Popular</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="review.php">Review</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-md-0">
