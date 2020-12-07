@@ -54,19 +54,19 @@ if($rows==1){
                 <p class="mb-2 text-muted text-uppercase small"><?php echo $row['company']; ?></p>
 
                 <ul class="rating">
-                  <?php 
+                    <?php 
                   $idx = 0;
                   for($idx = 0; $idx < $row['rating'];$idx++) { ?>
                     <li>
                         <i class="fa fa-star fa-sm text-primary"></i>
                     </li>
-                  <?php } 
+                    <?php } 
                   $missing = 5 - $idx;
                   for($idx = 0; $idx < $missing; $idx++) { ?>
                     <li>
                         <i class="fa fa-star-o fa-sm text-primary"></i>
                     </li>
-                  <?php } 
+                    <?php } 
                   ?>
                 </ul>
                 <p><span class="mr-1"><strong>$<?php echo $row['price']; ?></strong></span></p>
@@ -105,7 +105,7 @@ if($rows==1){
                 <p class="pt-1"><?php echo $row['productDescription']; ?></p>
             </div>
             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-            <?php
+                <?php
               $proId = $row['id']; 
               // echo $proId;
               $review_sql = "SELECT * FROM Review WHERE productId='$proId'";
@@ -113,47 +113,47 @@ if($rows==1){
                 $review_rows = mysqli_num_rows($review_result);
                 if($review_rows > 0){
                   ?>
-                      <h5><span><?php echo $review_rows?></span> review for <span><?php echo $row['productName']?></span></h5>
-                    <?php while($review_row = mysqli_fetch_array($review_result)){ ?>  
-                          <div class="media mt-3 mb-4 reviews-box">
-                              <img class="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
-                                  width="62" alt="Generic placeholder image">
-                              <div class="media-body">
-                                  <div class="d-flex justify-content-between">
-                                      <p class="mt-1 mb-2">
-                                          <strong><?php echo $review_row['username']?> </strong>
-                                          <span>– </span><span><?php echo $review_row['createdAt']?> </span>
-                                      </p>
-                                  </div>
-                                  <p class="mb-0"><?php echo $review_row['content']?></p>
-                              </div>
-                          </div>
-                        <?php 
+                <h5><span><?php echo $review_rows?></span> review for <span><?php echo $row['productName']?></span></h5>
+                <?php while($review_row = mysqli_fetch_array($review_result)){ ?>
+                <div class="media mt-3 mb-4 reviews-box">
+                    <img class="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
+                        width="62" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="mt-1 mb-2">
+                                <strong><?php echo $review_row['username']?> </strong>
+                                <span>– </span><span><?php echo $review_row['createdAt']?> </span>
+                            </p>
+                        </div>
+                        <p class="mb-0"><?php echo $review_row['content']?></p>
+                    </div>
+                </div>
+                <?php 
                         }
                       }
                     }?>
-                  <div>
-                  <form action="review.php?id=<?php echo $row['id'];?>" method="post">
-                    <h5 class="mt-4">Add a review</h5>
-                    <div class="rating-counter-container">
-                        <div class="rating mb-0">                   
-                          <i class="fa fa-star-o fa-sm"></i>                          
-                          <i class="fa fa-star-o fa-sm"></i>                          
-                          <i class="fa fa-star-o fa-sm"></i>                          
-                          <i class="fa fa-star-o fa-sm"></i>                                                    
-                          <i class="fa fa-star-o fa-sm"></i>                          
+                <div>
+                    <form action="review.php?id=<?php echo $row['id'];?>" method="post">
+                        <h5 class="mt-4">Add a review</h5>
+                        <div class="rating-counter-container">
+                            <div class="rating mb-0">
+                                <i class="fa fa-star-o fa-sm"></i>
+                                <i class="fa fa-star-o fa-sm"></i>
+                                <i class="fa fa-star-o fa-sm"></i>
+                                <i class="fa fa-star-o fa-sm"></i>
+                                <i class="fa fa-star-o fa-sm"></i>
+                            </div>
+                            <div id="counter"></div>
                         </div>
-                        <div id="counter"></div>
-                    </div>
-                    <!-- Your review -->
-                    <div class="md-form md-outline">
-                        <textarea id="form76" class="md-textarea form-control pr-6" rows="4"
-                            placeholder="Your Review" name="review"></textarea>
-                    </div>
-                    <p>Name: <?php print_r($_SESSION['user']['Username']) ?></p>
-                    <p>Email: <?php print_r($_SESSION['user']['EmailAddress']) ?></p>
-                    <button class="btn btn-primary waves-effect waves-light" type="submit">Add a review</button>
-                  </form>
+                        <!-- Your review -->
+                        <div class="md-form md-outline">
+                            <textarea id="form76" class="md-textarea form-control pr-6" rows="4"
+                                placeholder="Your Review" name="review"></textarea>
+                        </div>
+                        <p>Name: <?php print_r($_SESSION['user']['Username']) ?></p>
+                        <p>Email: <?php print_r($_SESSION['user']['EmailAddress']) ?></p>
+                        <button class="btn btn-primary waves-effect waves-light" type="submit">Add a review</button>
+                    </form>
                 </div>
             </div>
         </div>
