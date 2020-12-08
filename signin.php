@@ -29,9 +29,10 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
     </form>
+</div>
+<div id="signin-form-container">
     <form action="google.php">
         <input type="submit" value="Google Sign in" />
     </form>
-
 </div>
 <?php include('includes/footer.php');?>
