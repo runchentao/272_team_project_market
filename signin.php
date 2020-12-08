@@ -31,15 +31,7 @@
     </form>
     <form action="google.php">
         <input type="submit" value="Google Sign in" />
-        <button onclick="signOut()">Google Sign out</button>
     </form>
 
 </div>
-<script>
-function signOut() {
-    gapi.auth2.getAuthInstance().signOut().then(function() {
-        console.log('user signed out')
-    })
-}
-</script>
 <?php include('includes/footer.php');?>
