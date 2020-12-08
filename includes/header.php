@@ -16,6 +16,9 @@
                     <?php echo $_SESSION['user'][1]; ?> | Logout
                 </a>
                 <?php else: ?>
+                <form action="google.php">
+                    <input type="submit" value="Google Sign in" />
+                </form>
                 <a class="navbar-brand" href="signin.php">Sign in</a>
                 <a class="navbar-brand" href="signup.php"> <span style="position:relative; left:-7.5px;"> | </span> Sign
                     up</a>
