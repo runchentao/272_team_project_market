@@ -27,6 +27,7 @@
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <button onclick="signOut()">Google Sign out</button>
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
     </form>
 
@@ -38,6 +39,12 @@ function onSignIn(googleUser) {
         $_SESSION['loggedin'] = true;
         header("location: home.php");
     ?>
+}
+
+function signOut() {
+    gapi.auth2.getAuthInstance().signOut().then(function() {
+        console.log('user signed out')
+    })
 }
 </script>
 <?php include('includes/footer.php');?>
