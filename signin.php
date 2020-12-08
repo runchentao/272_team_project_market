@@ -32,8 +32,12 @@
 </div>
 <script>
 function onSignIn(googleUser) {
-    <?php $_SESSION['loggedin'] = true;?>
-    window.location = "https://market-place-272.herokuapp.com/home.php";
+    <?php 
+        session_start();
+        $_SESSION['loggedin'] = true;
+        echo "successful";
+        header("location: home.php");
+    ?>
 }
 </script>
 <?php include('includes/footer.php');?>
