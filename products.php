@@ -63,16 +63,20 @@ require_once('utils/dbConn.php');
                     <div class="rating-counter-container">
                     <div class="rating mb-0"> 
                         <ul class="rating mb-0">
-                            <?php 
-                            $idx = 0;
-                            for($idx = 0; $idx < $row['rating'];$idx++) { ?>
+                            <?php for($idx = 0; $idx < floor($row['rating']);$idx++): ?>
                                 <i class="fa fa-star fa-sm text-primary"></i>
-                            <?php } 
-                            $missing = 5 - $idx;
-                            for($idx = 0; $idx < $missing; $idx++) { ?>
+                            <?php endfor; ?> 
+                            <?php if ($row['rating'] - floor($row['rating']) >= 0.5): ?>
+                                <i class="fa fa-star-half-o fa-sm text-primary"></i>
+                            <?php else:?>
+                                <?php if($row['rating'] - floor($row['rating']) > 0): ?>
+                                    <i class="fa fa-star-o fa-sm text-primary"></i>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <?php $missing = 5 - ceil($row['rating']); ?>
+                            <?php for($idx = 0; $idx < $missing; $idx++): ?>
                                 <i class="fa fa-star-o fa-sm text-primary"></i>
-                            <?php } 
-                            ?>
+                            <?php endfor; ?>
                         </ul>
                     </div>
                     </div>
