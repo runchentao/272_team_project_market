@@ -30,4 +30,34 @@
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
     </form>
 </div>
+
+<script>
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    var id_token = googleUser.getAuthResponse().id_token;
+    var first_name = profile.getGivenName());
+var last_name = profile.getFamilyName());
+var email = profile.getEmail());
+
+<?php
+    require_once('utils/dbConn.php');
+    session_start();
+
+    $sql = "INSERT INTO users (Username, FirstName, LastName, EmailAddress)
+    VALUES ('$id_token', '$first_name', '$last_name', '$email')";
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "successful";
+        $_SESSION['add_user'] = true;
+        $_SESSION['username'] = $username;
+        header("location: signin.php");
+    } else {
+        $_SESSION['add_user'] = false;
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    
+    $conn->close();
+    ?>
+}
+</script>
 <?php include('includes/footer.php');?>
