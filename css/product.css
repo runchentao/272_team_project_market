@@ -7,7 +7,12 @@
     justify-content: flex-start;
     align-items: center;
 }
-
+ul.rating {
+    margin-bottom: 0px;
+}
+ul.rating > li > i {
+    color:#f5d02c;
+}
 .rating-counter-container > #counter {
     margin-left: 5px;
 }
@@ -18,4 +23,22 @@
 }
 .rating-counter-container {
     margin-bottom: 7px;
+}
+.classic-tabs > ul.nav > li.nav-item{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(226, 226, 226);
+    border-radius:8px 8px 0px 0px;
+    border-bottom: 1px solid  rgb(184, 184, 184);
+}
+
+.classic-tabs > ul.nav > li:first-child {
+    border-right: 1px solid rgb(184, 184, 184);
+}
+#descReviewContent {
+    padding: 20px;
+    background-color:  rgb(245, 245, 245);
 }
