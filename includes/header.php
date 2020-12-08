@@ -13,6 +13,7 @@
                     <i class="fa fa-user-circle" aria-hidden="true" style="margin-right: 5px"></i>
                     <?php echo $_SESSION['user'][1]; ?> | Logout
                 </a>
+                <button onclick="signOut()">Google Sign out</button>
                 <?php else: ?>
                 <a class="navbar-brand" href="signin.php">Sign in</a>
                 <a class="navbar-brand" href="signup.php"> <span style="position:relative; left:-7.5px;"> | </span> Sign
@@ -88,3 +89,11 @@
             </div>
         </div>
     </nav>
+
+    <script>
+    function signOut() {
+        gapi.auth2.getAuthInstance().signOut().then(function() {
+            console.log('user signed out')
+        })
+    }
+    </script>

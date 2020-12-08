@@ -26,10 +26,9 @@
             New to our website? <a href="signup.php">Sign up now.</a>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        <button onclick="signOut()">Google Sign out</button>
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
     </form>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
 </div>
 
 <script>
@@ -42,12 +41,48 @@ function onSignIn(googleUser) {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    if (googleUser.getBasicProfile() != null) {
+        onSignInSuccess(googleUser);
+    }
 }
 
-function signOut() {
-    gapi.auth2.getAuthInstance().signOut().then(function() {
-        console.log('user signed out')
-    })
+function onSignInSuccess(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    var id = profile.getId();
+    var id_token = googleUser.getAuthResponse().id_token;
+    var fn = profile.getGivenName();
+    var ln = profile.getFamilyName()
+    var em = profile.getEmail();
+
+    <?php
+        require_once('utils/dbConn.php');
+        session_start();
+        $username = id;
+        $password = id_token;
+        $firstName = fn;
+        $lastName = ln;
+        $email = em;
+
+        $sql = "INSERT INTO users (Username, Passwd, FirstName, LastName, EmailAddress)
+        VALUES ('$username', '$password', '$firstName', '$lastName', '$email')";
+
+        if ($mysqli->query($sql) === TRUE) {
+            echo "successful";
+            $_SESSION['add_user'] = true;
+            $_SESSION['username'] = $username;
+            $_SESSION['loggedin'] = true;
+
+            $sql2 = "SELECT * FROM users WHERE Username='$username' AND Passwd='$password'";
+            $result = mysqli_query($mysqli, $sql); 
+            $rows = mysqli_num_rows($result);
+
+            header("location: home.php");
+        } else {
+            $_SESSION['add_user'] = false;
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        $conn->close();
+    ?>
 }
 </script>
 <?php include('includes/footer.php');?>
