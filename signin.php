@@ -28,61 +28,11 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
     </form>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <form action="my.php" method="post">
+        <input type="submit">
+        <div class="g-signin2" type="google.php"></div>
+    </form>
+
 </div>
 
-<script>
-function onSignIn(googleUser) {
-    console.log("user is: ", JSON.stringify(googleUser.getBasicProfile()));
-    var profile = googleUser.getBasicProfile();
-    var id_token = googleUser.getAuthResponse().id_token;
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log("id_token", id_token);
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    if (googleUser.getBasicProfile() != null) {
-        onSignInSuccess(googleUser);
-    }
-}
-
-function onSignInSuccess(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    var id = profile.getId();
-    var id_token = googleUser.getAuthResponse().id_token;
-    var fn = profile.getGivenName();
-    var ln = profile.getFamilyName()
-    var em = profile.getEmail();
-
-    <?php
-        require_once('utils/dbConn.php');
-        session_start();
-        $username = id;
-        $password = id_token;
-        $firstName = fn;
-        $lastName = ln;
-        $email = em;
-
-        $sql = "INSERT INTO users (Username, Passwd, FirstName, LastName, EmailAddress)
-        VALUES ('$username', '$password', '$firstName', '$lastName', '$email')";
-
-        if ($mysqli->query($sql) === TRUE) {
-            echo "successful";
-            $_SESSION['add_user'] = true;
-            $_SESSION['username'] = $username;
-            $_SESSION['loggedin'] = true;
-
-            $sql2 = "SELECT * FROM users WHERE Username='$username' AND Passwd='$password'";
-            $result = mysqli_query($mysqli, $sql); 
-            $rows = mysqli_num_rows($result);
-
-            header("location: home.php");
-        } else {
-            $_SESSION['add_user'] = false;
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-        $conn->close();
-    ?>
-}
-</script>
 <?php include('includes/footer.php');?>
