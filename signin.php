@@ -26,16 +26,16 @@
             New to our website? <a href="signup.php">Sign up now.</a>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
     </form>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
 </div>
 <script>
 function onSignIn(googleUser) {
     <?php 
         session_start();
         $_SESSION['loggedin'] = true;
-        echo "successful";
         header("location: home.php");
     ?>
 }
