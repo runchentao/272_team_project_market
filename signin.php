@@ -27,6 +27,7 @@
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <button onclick="signOut()">Google Sign out</button>
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
     </form>
 </div>
@@ -34,8 +35,19 @@
 <script>
 function onSignIn(googleUser) {
     console.log("user is: ", JSON.stringify(googleUser.getBasicProfile()));
+    var profile = googleUser.getBasicProfile();
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log("id_token", id_token);
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
 
-    document.querySelector('#content').innerText = googleUser.getBasicProfile().getGivenName();
+function signOut() {
+    gapi.auth2.getAuthInstance().signOut().then(function() {
+        console.log('user signed out')
+    })
 }
 </script>
 <?php include('includes/footer.php');?>
