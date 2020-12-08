@@ -37,9 +37,10 @@ require_once('utils/dbConn.php');
         if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){ 
                 ?>
-    <div class="col">
+    <div class="col-md-6" >
         <!-- product -->
-        <div id="product-card" class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250">
+        <div id="product-card" class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250"
+             style="margin: 0px auto">
             <div class="col-auto d-none d-lg-block">
                 <div class="bd-placeholder-img">
                     <?php echo '<img id="productImg" src="'.$row["productImg"].'"/>'; ?>
@@ -56,18 +57,26 @@ require_once('utils/dbConn.php');
                 </div>
 
                 <div class="rating-counter-container">
-                    <h6>Ratings:
-                        <?php 
-                                $idx = 0;
-                                for($idx = 0; $idx < $row['rating'];$idx++) { ?>
-                        <i class="fa fa-star fa-sm text-primary"></i>
-                        <?php } 
-                                $missing = 5 - $idx;
-                                for($idx = 0; $idx < $missing; $idx++) { ?>
-                        <i class="fa fa-star-o fa-sm text-primary"></i>
-                        <?php } 
-                                ?>
+                    <?php if($row['rating'] == NULL): ?>
+                        <div style="color: #989898; margin-bottom: 7px;"><i>No reviews yet</i></div>
+                    <?php else: ?>
+                    <h6>
+                        <?php for($idx = 0; $idx < floor($row['rating']);$idx++):?>
+                            <i class="fa fa-star fa-sm text-primary"></i>
+                        <?php endfor;?>
+                        <?php $half = $row['rating'] - floor($row['rating']); ?>
+                        <?php if($half > 0 && $half < 0.5):?>
+                            <i class="fa fa-star-o fa-sm text-primary"></i>
+                        <?php else: ?>
+                            <i class="fa fa-star-half-o fa-sm text-primary"></i>
+                        <?php endif; ?>
+                        <?php $missing = 5 - ceil($row['rating']); ?>
+                        <?php for($idx = 0; $idx < $missing; $idx++): ?>
+                            <i class="fa fa-star-o fa-sm text-primary"></i>
+                        <?php endfor; ?>
+                        <span><?php echo round($row['rating'],1); ?></span>
                     </h6>
+                    <?php endif;?>
                 </div>
                 <div class="product-info smart-form">
                     <?php echo '<a href="product.php?id='.$row['id'].'" class="btn btn-success">Read More</a>'; ?>
