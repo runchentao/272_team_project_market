@@ -1,5 +1,6 @@
 <?php include('includes/head.php'); ?>
 <?php include('includes/header.php');?>
+<?php session_start();?>
 <Link rel="stylesheet" href="css/signin.css">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="343939675754-mito5glsefguavihrbarr4r7td7fko24.apps.googleusercontent.com">
@@ -26,19 +27,15 @@
             New to our website? <a href="signup.php">Sign up now.</a>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        <button onclick="signOut()">Google Sign out</button>
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
+    </form>
+    <form action="google.php">
+        <input type="submit" class="g-signin2" value="Google Sign in" />
+        <button onclick="signOut()">Google Sign out</button>
     </form>
 
 </div>
 <script>
-function onSignIn(googleUser) {
-    <?php session_start();?>
-    <?php $_SESSION['loggedin'] = true;?>
-    <?php header("location: home.php");?>
-}
-
 function signOut() {
     gapi.auth2.getAuthInstance().signOut().then(function() {
         console.log('user signed out')
