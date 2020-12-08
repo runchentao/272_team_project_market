@@ -34,11 +34,9 @@
 </div>
 <script>
 function onSignIn(googleUser) {
-    <?php 
-        session_start();
-        $_SESSION['loggedin'] = true;
-        header("location: home.php");
-    ?>
+    <?php session_start();?>
+    <?php $_SESSION['loggedin'] = true;?>
+    <?php header("location: home.php");?>
 }
 
 function signOut() {
