@@ -32,7 +32,7 @@
 </div>
 <script>
 function onSignIn(googleUser) {
-    header("location: google.php");
+    window.location = "https://market-place-272.herokuapp.com/google.php";
 }
 </script>
 <?php include('includes/footer.php');?>
