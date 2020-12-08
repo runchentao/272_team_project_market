@@ -37,9 +37,10 @@ require_once('utils/dbConn.php');
         if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){ 
                 ?>
-    <div class="col">
+    <div class="col-md-6" >
         <!-- product -->
-        <div id="product-card" class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250">
+        <div id="product-card" class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250"
+             style="margin: 0px auto">
             <div class="col-auto d-none d-lg-block">
                 <div class="bd-placeholder-img">
                     <?php echo '<img id="productImg" src="'.$row["productImg"].'"/>'; ?>
