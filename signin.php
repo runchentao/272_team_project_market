@@ -30,7 +30,7 @@
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
     </form>
     <form action="google.php">
-        <input type="submit" class="g-signin2" value="Google Sign in" />
+        <input type="submit" value="Google Sign in" />
         <button onclick="signOut()">Google Sign out</button>
     </form>
 
