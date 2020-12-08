@@ -32,7 +32,7 @@
 </div>
 <script>
 function onSignIn(googleUser) {
-    $_SESSION['loggedin'] = true;
+    <?php $_SESSION['loggedin'] = true;?>
     window.location = "https://market-place-272.herokuapp.com/home.php";
 }
 </script>
