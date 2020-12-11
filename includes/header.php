@@ -57,34 +57,19 @@
                         <a class="nav-link" href="popular.php">Popular</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-md-0">
-                    <i class="fa fa-sort" aria-hidden="true" style="margin-right:7px;"></i>
-                    <select>
-                        <optgroup label="Market Place">
-                            <option value="volvo">Default</option>
-                            <option value="volvo">Most Visited</option>
-                            <option value="saab">Best Review</option>
-                        </optgroup>
-                        <optgroup label="FindH">
-                            <option value="volvo">Most Visited</option>
-                            <option value="saab">Best Review</option>
-                        </optgroup>
-                        <optgroup label="Webify">
-                            <option value="volvo">Most Visited</option>
-                            <option value="saab">Best Review</option>
-                        </optgroup>
-                        <optgroup label="JiuBar">
-                            <option value="volvo">Most Visited</option>
-                            <option value="saab">Best Review</option>
-                        </optgroup>
-                        <optgroup label="Pancake Yang">
-                            <option value="volvo">Most Visited</option>
-                            <option value="saab">Best Review</option>
-                        </optgroup>
-                    </select>
-                    <i class="fa fa-search" aria-hidden="true" style="margin-left:10px; margin-right:7px;"></i>
-                    <input class="form-control" type="text" placeholder="Search Products" aria-label="Search">
-                </form>
             </div>
+            <form id="sort" class="form-inline my-2 my-md-0" method="post" action="popularByComp.php">
+                <i class="fa fa-sort" aria-hidden="true" style="margin-right:7px;"></i>
+                <select name="companyName" style="margin-right:7px;">
+                    <optgroup label="Best Review by Company">
+                        <option value="" disabled selected>select</option>
+                        <option value="findH">FindH</option>
+                        <option value="Webify">Webify</option>
+                        <option value="jiuBar">JiuBar</option>
+                        <option value="Pancake Yang">Pancake Yang</option>
+                    </optgroup>
+                </select>
+                <input type="submit" name="send" value="sort" />
+            </form>
         </div>
     </nav>
