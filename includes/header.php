@@ -13,18 +13,15 @@
                     <i class="fa fa-user-circle" aria-hidden="true" style="margin-right: 5px"></i>
                     <?php echo $_SESSION['user'][1]; ?> | Logout
                 </a>
+                <?php elseif(isset($_SESSION['googleLoggedin']) && $_SESSION['googleLoggedin'] == true): ?>
+                <a onclick="signOut()" href="googleLogout.php">Sign out</a>
                 <?php else: ?>
                 <a class="navbar-brand" href="signin.php">Sign in</a>
                 <a class="navbar-brand" href="signup.php"> <span style="position:relative; left:-7.5px;"> | </span> Sign
                     up</a>
                 <?php endif; ?>
 
-                <?php if(isset($_SESSION['googleLoggedin']) && $_SESSION['googleLoggedin'] == true): ?>
-                <a class="navbar-brand" class="nav-link" href="googleLogout.php" onclick="signOut();">
-                    <i class="fa fa-user-circle" aria-hidden="true" style="margin-right: 5px"></i>
-                    Logout
-                </a>
-                <?php endif; ?>
+
             </div>
         </div>
     </nav>
