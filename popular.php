@@ -7,12 +7,22 @@ require_once('utils/dbConn.php');
 <Link rel="stylesheet" href="css/popular.css">
 <div class="row mb-2" style="padding-top:50px; margin: auto; width: 90%;">
     <?php 
-    $sql = "SELECT * FROM Product ORDER BY rating DESC";
-    if($result = mysqli_query($mysqli, $sql)){
+        $sql = "SELECT * FROM Product ORDER BY rating DESC";
+        $results = array(); 
+     if($result = mysqli_query($mysqli, $sql)){
         if(mysqli_num_rows($result) > 0){
+            $total = mysqli_num_rows($result);
             while($row = mysqli_fetch_array($result)){ 
-                ?>
+                $results[] = $row;
+            }
+        }
+    }
+    ?>
+    
+    <?php for($i = 0; $i < min(count($results), 5);$i++): ?>
+    <?php $row = $results[$i]; ?>
     <div class="col">
+        
         <!-- product -->
         <div id="product-card" class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250">
 
@@ -34,16 +44,24 @@ require_once('utils/dbConn.php');
                 <div class="rating-counter-container">
                     <h6>Ratings:
 
-                        <?php 
-                            $idx = 0;
-                            for($idx = 0; $idx < $row['rating'];$idx++) { ?>
-                        <i class="fa fa-star fa-sm text-primary"></i>
-                        <?php } 
-                            $missing = 5 - $idx;
-                            for($idx = 0; $idx < $missing; $idx++) { ?>
-                        <i class="fa fa-star-o fa-sm text-primary"></i>
-                        <?php } 
-                            ?>
+                    <?php for($idx = 0; $idx < floor($row['rating']);$idx++):?>
+                            <i class="fa fa-star fa-sm text-primary"></i>
+                        <?php endfor;?>
+                        <?php $half = $row['rating'] - floor($row['rating']); 
+                        ?>
+                        <?php if($half > 0 && $half < 0.5):?>
+                            <i class="fa fa-star-o fa-sm text-primary"></i>
+                        <?php else: ?>
+                            <?php if($half != 0):?>
+                            <i class="fa fa-star-half-o fa-sm text-primary"></i>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php $missing = 5 - ceil($row['rating']); ?>
+                        <?php for($idx = 0; $idx < $missing; $idx++): ?>
+                            <i class="fa fa-star-o fa-sm text-primary"></i>
+                        <?php endfor; ?>
+                        <span><?php echo round($row['rating'],1); ?></span>
+
 
                     </h6>
                 </div>
@@ -58,9 +76,6 @@ require_once('utils/dbConn.php');
 
         </div>
     </div>
-    <?php 
-        } 
-    }?>
+    <?php endfor; ?>
 </div>
 <?php include('includes/footer.php');?>
-<?php }?>

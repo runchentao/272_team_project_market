@@ -57,7 +57,12 @@ require_once('utils/dbConn.php');
                     $row = mysqli_fetch_array($result);
                     $dataset[] = $row;
                 }
-                echo '<h6 class="border-bottom border-gray pb-2 mb-0">Recent visit</h6>';
+                echo 
+                '<div style="display:flex;flex-direction:row;justify-content: flex-start;align-items: center">
+                    <h6 style="margin-right: 4px;" class="border-bottom border-gray pb-2 mb-0">Recent visit</h6>
+                    <span style="padding-bottom: .5rem!important; margin-right: 4px; "> | </span>
+                    <a href="history.php"><h6 class="border-bottom border-gray pb-2 mb-0">Most visit</h6></a>
+                 </div>';
             }else{
                 $arrID = [];
                 for($idx = 0; $idx < sizeof($arr); $idx++){
@@ -70,32 +75,25 @@ require_once('utils/dbConn.php');
                     $arrID[] = $row['id'];
                 }
                 $cou = array_count_values($arrID);
-                arsort($cou);
-                print_r($cou);
-                if(sizeof($cou) > 5){
-                    $num = 5;
-                }else{
-                    $num = sizeof($cou);
-                }
-                $x = 0;
-                $arr = array();
-                while (++$x <= $num)
-                {
-                    $key = key($cou);
-                    array_push($arr, $key);
-                    next($cou);
-                }
+                asort($cou);
+                
                 // $dataset = $arr;
                 $dataset = [];
-                for($idx = 0; $idx < sizeof($arr); $idx++){
-                    $id =$arr[$idx];
+                foreach($cou as $key=>$value){
+                    $id = $key;
                     // echo $id;
                     $sql = "SELECT * from Product WHERE id='$id'";
                     $result = mysqli_query($mysqli, $sql); 
                     $row = mysqli_fetch_array($result);
                     $dataset[] = $row;
+                    $dataset[count($dataset) - 1]["visited"] = $value;
                 }
-                echo '<h6 class="border-bottom border-gray pb-2 mb-0">Most visit</h6>';
+                echo 
+            '<div style="display:flex;flex-direction:row;justify-content: flex-start;align-items: center">
+                <h6 style="margin-right: 4px;" class="border-bottom border-gray pb-2 mb-0">Most visit</h6>
+                <span style="padding-bottom: .5rem!important; margin-right: 4px; "> | </span>
+                <a href="history.php?his=true"><h6  class="border-bottom border-gray pb-2 mb-0">Recent visit</h6></a>
+             </div>';
             }
             //$dataset = [];
             // print_r($dataset);
@@ -103,9 +101,9 @@ require_once('utils/dbConn.php');
                 $type = $dataset[$idx]['company'];
                 if($type=="findH"){
                     $color = "#007bff";
-                }else if($type = "Town House"){
+                }else if($type == "Webify"){
                     $color = "#453e21";
-                }else if($type = "Apartment"){
+                }else if($type == "jiuBar"){
                     $color = "#6f42c1";
                 }else{
                     $color = "#e83e8c";
@@ -125,7 +123,7 @@ require_once('utils/dbConn.php');
                             <?php echo $dataset[$idx][2]; ?>
                         </a>
                         <?php if(!isset($_GET['his']) && !isset($_POST['history'])): ?>
-                            - <?php echo $num ?> Visits
+                            - <?php echo $dataset[$idx]["visited"]; ?> Visits
                         <?php endif; ?>
                 </p>
             </div>
