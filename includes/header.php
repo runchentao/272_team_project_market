@@ -8,7 +8,7 @@
                 Market Place
             </a>
             <div style="display: flex; align-items: center">
-                <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
+                <?php if(!isset($_SESSION['googleLoggedin']) && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
                 <a class="navbar-brand" class="nav-link" href="success.php">
                     <i class="fa fa-user-circle" aria-hidden="true" style="margin-right: 5px"></i>
                     <?php echo $_SESSION['user'][1]; ?> | Logout
@@ -17,6 +17,13 @@
                 <a class="navbar-brand" href="signin.php">Sign in</a>
                 <a class="navbar-brand" href="signup.php"> <span style="position:relative; left:-7.5px;"> | </span> Sign
                     up</a>
+                <?php endif; ?>
+
+                <?php if(isset($_SESSION['googleLoggedin']) && $_SESSION['googleLoggedin'] == true): ?>
+                <a class="navbar-brand" class="nav-link" href="googleLogout.php" onclick="signOut();">
+                    <i class="fa fa-user-circle" aria-hidden="true" style="margin-right: 5px"></i>
+                    Logout
+                </a>
                 <?php endif; ?>
             </div>
         </div>
@@ -73,3 +80,12 @@
             </form>
         </div>
     </nav>
+
+    <script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function() {
+            console.log('User signed out.');
+        });
+    }
+    </script>
