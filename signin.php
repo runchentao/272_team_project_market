@@ -29,8 +29,7 @@
         <p class="mt-5 mb-3 text-muted" style="text-align: center">© 2017-2020</p>
     </form>
     <form action="signinGoogle.php">
-        <button class="g-signin2" type="submit"></button>
-        <input type="submit" value="Click after signed in" />
+        <input class="g-signin2" type="submit"></input>
     </form>
 </div>
 

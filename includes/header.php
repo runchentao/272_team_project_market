@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="css/navbar.css">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="343939675754-mito5glsefguavihrbarr4r7td7fko24.apps.googleusercontent.com">
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="site-nav" style="height:40px">
