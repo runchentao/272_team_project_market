@@ -64,11 +64,14 @@ require_once('utils/dbConn.php');
                         <?php for($idx = 0; $idx < floor($row['rating']);$idx++):?>
                             <i class="fa fa-star fa-sm text-primary"></i>
                         <?php endfor;?>
-                        <?php $half = $row['rating'] - floor($row['rating']); ?>
+                        <?php $half = $row['rating'] - floor($row['rating']); 
+                        ?>
                         <?php if($half > 0 && $half < 0.5):?>
                             <i class="fa fa-star-o fa-sm text-primary"></i>
                         <?php else: ?>
+                            <?php if($half != 0):?>
                             <i class="fa fa-star-half-o fa-sm text-primary"></i>
+                            <?php endif; ?>
                         <?php endif; ?>
                         <?php $missing = 5 - ceil($row['rating']); ?>
                         <?php for($idx = 0; $idx < $missing; $idx++): ?>

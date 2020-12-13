@@ -32,6 +32,6 @@
     }
     $updateProduct = "update Product set rating='$updatedScore' where id='$productID'";
     $mysqli->query($updateProduct);
-    header("location: product.php?id=".$productID.".php");
+    header("location: product.php?id=".$productID);
     $mysqli->close();
 ?>
