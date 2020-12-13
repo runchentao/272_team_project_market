@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="css/navbar.css">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="343939675754-mito5glsefguavihrbarr4r7td7fko24.apps.googleusercontent.com">
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="site-nav" style="height:40px">
@@ -8,16 +10,20 @@
                 Market Place
             </a>
             <div style="display: flex; align-items: center">
-                <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
+                <?php if(!isset($_SESSION['googleLoggedin']) && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
                 <a class="navbar-brand" class="nav-link" href="success.php">
                     <i class="fa fa-user-circle" aria-hidden="true" style="margin-right: 5px"></i>
                     <?php echo $_SESSION['user'][1]; ?> | Logout
                 </a>
+                <?php elseif(isset($_SESSION['googleLoggedin']) && $_SESSION['googleLoggedin'] == true): ?>
+                <a onclick="signOut()" href="googleLogout.php">Sign out</a>
                 <?php else: ?>
                 <a class="navbar-brand" href="signin.php">Sign in</a>
                 <a class="navbar-brand" href="signup.php"> <span style="position:relative; left:-7.5px;"> | </span> Sign
                     up</a>
                 <?php endif; ?>
+
+
             </div>
         </div>
     </nav>
@@ -73,3 +79,19 @@
             </form>
         </div>
     </nav>
+
+    <script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function() {
+            console.log('User signed out.');
+        });
+    }
+
+    function onLoad() {
+        gapi.load('auth2', function() {
+            gapi.auth2.init();
+        });
+    }
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
